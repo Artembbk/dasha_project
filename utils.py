@@ -183,7 +183,7 @@ def predcit(model, test_data, X_test, scaler, device, company):
 
     prediction_result = {}
 
-    prediction_result["Date"] = list(test_data.index[-100:-7] + combined_index[-7:])
+    prediction_result["Date"] = list(test_data.index[-100:-7]) + list(combined_index[-7:])
     prediction_result[company] = list(test_data[company][-100:-7]) + forecasted_cases
 
     return prediction_result
