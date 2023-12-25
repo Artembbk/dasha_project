@@ -183,18 +183,18 @@ def predcit(model, test_data, X_test, scaler, device, company):
 
 
     #Test data
-    plt.plot(test_data.index[-100:-7], test_data[company][-100:-7], label = "test_data", color = "b") 
+    plt.plot(test_data.index[-100:-7], test_data[company][-100:-7], label = "actual data", color = "b") 
     #reverse the scaling transformation
     original_cases = scaler.inverse_transform(np.expand_dims(sequence_to_plot[-1], axis=0)).flatten() 
 
     #the historical data used as input for forecasting
-    plt.plot(test_data.index[-7:], original_cases, label='actual values', color='green') 
+    # plt.plot(test_data.index[-7:], original_cases, label='actual values', color='green') 
 
     #Forecasted Values 
     #reverse the scaling transformation
     forecasted_cases = scaler.inverse_transform(np.expand_dims(forecasted_values, axis=0)).flatten() 
     # plotting the forecasted values
-    plt.plot(combined_index[-14:], forecasted_cases, label='forecasted values', color='red') 
+    plt.plot(combined_index[-7:], forecasted_cases, label='forecasted values', color='red') 
 
     plt.xlabel('Time Step')
     plt.ylabel('Value')
