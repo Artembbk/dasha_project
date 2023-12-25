@@ -178,28 +178,12 @@ def predcit(model, test_data, X_test, scaler, device, company):
     # Concatenate the original index with the future dates
     combined_index = test_data.index.append(future_dates)
 
-    #set the size of the plot 
-    plt.rcParams['figure.figsize'] = [14, 4] 
 
-
-    #Test data
-    plt.plot(test_data.index[-100:-7], test_data[company][-100:-7], label = "actual data", color = "b") 
-    #reverse the scaling transformation
-    original_cases = scaler.inverse_transform(np.expand_dims(sequence_to_plot[-1], axis=0)).flatten() 
-
-    plt.plot(test_data.index[-7:], original_cases, label='actual values', color='green') 
-
-    #Forecasted Values 
-    #reverse the scaling transformation
     forecasted_cases = scaler.inverse_transform(np.expand_dims(forecasted_values, axis=0)).flatten() 
-    print(forecasted_cases)
-    # plotting the forecasted values
-    plt.plot(combined_index[-14:], forecasted_cases, label='forecasted values', color='red') 
 
-    plt.xlabel('Time Step')
-    plt.ylabel('Value')
-    plt.legend()
-    plt.title('Time Series Forecasting')
-    plt.grid(True)
+    prediction_result = {}
 
-            
+    prediction_result["Date"] = list(test_data.index[-100:-7] + combined_index[-7:])
+    prediction_result[company] = list(test_data[company][-100:-7]) + forecasted_cases
+
+    return prediction_result
