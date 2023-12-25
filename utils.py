@@ -142,7 +142,7 @@ def train(X_train, y_train, X_test, y_test, company):
     PATH = f"/content/dasha_project/{company}_model.path"
     torch.save(model.state_dict(), PATH)
     
-def predcit(model, test_data, X_test, scaler, device):
+def predcit(model, test_data, X_test, scaler, device, company):
     # Define the number of future time steps to forecast
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     num_forecast_steps = 30
@@ -183,7 +183,7 @@ def predcit(model, test_data, X_test, scaler, device):
 
 
     #Test data
-    plt.plot(test_data.index[-100:-30], test_data.YNDX[-100:-30], label = "test_data", color = "b") 
+    plt.plot(test_data.index[-100:-30], test_data[company][-100:-30], label = "test_data", color = "b") 
     #reverse the scaling transformation
     original_cases = scaler.inverse_transform(np.expand_dims(sequence_to_plot[-1], axis=0)).flatten() 
 
