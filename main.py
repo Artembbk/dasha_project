@@ -18,7 +18,9 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from dasha_project.utils import *
 
-def train_all(all_data, comp_dict):
+def train_all(comp_dict, all_data=None):
+    if all_data is None:
+        all_data = read_data()
     for company in comp_dict.values():
         data = get_company_data(all_data, company)
         train_data, test_data = split_train_test_data(data)
