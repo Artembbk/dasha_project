@@ -44,7 +44,7 @@ def get_Xy_train_test(train_data, test_data, company):
     X_train = torch.tensor(X_train, dtype=torch.float32)
     y_train = torch.tensor(y_train, dtype=torch.float32)
     # Create sequences and labels for testing data
-    sequence_length = 30  # Number of time steps to look back
+    sequence_length = 7  # Number of time steps to look back
     X_test, y_test = [], []
     for i in range(len(scaled_test) - sequence_length):
         X_test.append(scaled_test[i:i+sequence_length])
