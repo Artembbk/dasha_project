@@ -144,6 +144,7 @@ def train(X_train, y_train, X_test, y_test, company):
     
 def predcit(model, test_data, X_test, scaler, device):
     # Define the number of future time steps to forecast
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     num_forecast_steps = 30
 
     # Convert to NumPy and remove singleton dimensions
