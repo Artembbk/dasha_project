@@ -27,8 +27,14 @@ def train_all(comp_dict, all_data=None):
         X_train, y_train, X_test, y_test, scaler = get_Xy_train_test(train_data, test_data, company)
         train(X_train, y_train, X_test, y_test, company)
     
-def predict_fn(company_ru, comp_dict):
+def predict_fn(company_ru, comp_dict, all_data=None):
     company = comp_dict[company_ru]
+    if all_data is None:
+        all_data = read_data()
+    data = get_company_data(all_data, company)
+    train_data, test_data = split_train_test_data(data)
+    X_train, y_train, X_test, y_test, scaler = get_Xy_train_test(train_data, test_data, company)
+        
 
     PATH = f"/content/dasha_project/{company}_model.path"
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
