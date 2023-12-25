@@ -173,7 +173,7 @@ def predcit(model, test_data, X_test, scaler, device, company):
 
     last_date = test_data.index[-1]
     # Generate the next 30 dates
-    future_dates = pd.date_range(start=last_date + pd.DateOffset(1), periods=30)
+    future_dates = pd.date_range(start=last_date + pd.DateOffset(1), periods=7)
 
     # Concatenate the original index with the future dates
     combined_index = test_data.index.append(future_dates)
