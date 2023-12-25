@@ -34,7 +34,7 @@ def main():
     model = LSTMModel(input_size, hidden_size, num_layers).to(device)
     model.load_state_dict(torch.load(PATH))
     model.eval()
-    predcit(model, test_data, X_test, scaler)
+    predcit(model, test_data, X_test, scaler, device)
 
 if __name__ == '__main__':
     main()

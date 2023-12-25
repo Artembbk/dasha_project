@@ -142,7 +142,7 @@ def train(X_train, y_train, X_test, y_test, company):
     PATH = f"{company}_model.path"
     torch.save(model.state_dict(), PATH)
     
-def predcit(model, test_data, X_test, scaler):
+def predcit(model, test_data, X_test, scaler, device):
     # Define the number of future time steps to forecast
     num_forecast_steps = 30
 
