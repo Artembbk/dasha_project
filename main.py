@@ -45,4 +45,4 @@ def predict_fn(company_ru, comp_dict, all_data=None):
     model = LSTMModel(input_size, hidden_size, num_layers).to(device)
     model.load_state_dict(torch.load(PATH))
     model.eval()
-    predcit(model, test_data, X_test, scaler, device, company)
+    return predcit(model, test_data, X_test, scaler, device, company)
