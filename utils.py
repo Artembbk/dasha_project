@@ -183,7 +183,7 @@ def predcit(model, test_data, X_test, scaler, device, company):
 
 
     #Test data
-    plt.plot(test_data.index[-100:], test_data[company][-100:], label = "actual data", color = "b") 
+    plt.plot(test_data.index[-100:-7], test_data[company][-100:-7], label = "actual data", color = "b") 
     #reverse the scaling transformation
     original_cases = scaler.inverse_transform(np.expand_dims(sequence_to_plot[-1], axis=0)).flatten() 
 
