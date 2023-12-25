@@ -139,7 +139,7 @@ def train(X_train, y_train, X_test, y_test, company):
     plt.legend()
     plt.show()
 
-    PATH = f"{company}_model.path"
+    PATH = f"/content/dasha_project/{company}_model.path"
     torch.save(model.state_dict(), PATH)
     
 def predcit(model, test_data, X_test, scaler, device):

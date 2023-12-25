@@ -18,14 +18,17 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader
 from dasha_project.utils import *
 
-def main():
-    company = "YNDX"
-    data = read_data()
-    data = get_company_data(data, company)
-    train_data, test_data = split_train_test_data(data)
-    X_train, y_train, X_test, y_test, scaler = get_Xy_train_test(train_data, test_data, company)
-    train(X_train, y_train, X_test, y_test, company)
-    PATH = f"{company}_model.path"
+def train_all(all_data, comp_dict):
+    for company in comp_dict.values():
+        data = get_company_data(all_data, company)
+        train_data, test_data = split_train_test_data(data)
+        X_train, y_train, X_test, y_test, scaler = get_Xy_train_test(train_data, test_data, company)
+        train(X_train, y_train, X_test, y_test, company)
+    
+def predict_fn(company_ru, comp_dict):
+    company = comp_dict[company_ru]
+
+    PATH = f"/content/dasha_project/{company}_model.path"
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     input_size = 1
     num_layers = 2
@@ -35,6 +38,3 @@ def main():
     model.load_state_dict(torch.load(PATH))
     model.eval()
     predcit(model, test_data, X_test, scaler, device)
-
-if __name__ == '__main__':
-    main()
